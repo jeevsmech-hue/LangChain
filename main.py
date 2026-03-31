@@ -1,22 +1,22 @@
 import os
-from dataclasses_json.stringcase import spinalcase
-from langchain_openai import ChatOpenAI
 from dataclasses import FrozenInstanceError
-from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound, VideoUnavailable
-from youtube_transcript_api import YouTubeTranscriptApi
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings, ChatOpenAI
-from langchain_community.vectorstores import FAISS
-from langchain_core.prompts import PromptTemplate
-from langchain_huggingface import HuggingFaceEmbeddings
-from langchain_groq import ChatGroq
+
+from dataclasses_json.stringcase import spinalcase
 from dotenv import load_dotenv
-from langchain_core.runnables import RunnableParallel, RunnablePassthrough, RunnableLambda
+from langchain_community.vectorstores import FAISS
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import (RunnableLambda, RunnableParallel,
+                                      RunnablePassthrough)
+from langchain_groq import ChatGroq
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+from youtube_transcript_api import (NoTranscriptFound, TranscriptsDisabled,
+                                    VideoUnavailable, YouTubeTranscriptApi)
 
 load_dotenv()
 
-from langchain_huggingface import HuggingFaceEndpoint
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 
 'step 1 A indexing Document loading '
