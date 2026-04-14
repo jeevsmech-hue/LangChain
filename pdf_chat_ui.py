@@ -3,7 +3,10 @@ from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
+#from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import FakeEmbeddings
+
+embeddings = FakeEmbeddings(size=1536)
 from langchain_groq import ChatGroq
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnableParallel, RunnablePassthrough, RunnableLambda
@@ -20,8 +23,10 @@ st.caption("Upload a PDF and ask questions about it")
 # ── Helpers ──────────────────────────────────────────────────────────────────
 
 @st.cache_resource(show_spinner="Loading embedding model...")
+#def get_embedding_model():
+    #return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 def get_embedding_model():
-    return HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    return FakeEmbeddings(size=1536)
 
 @st.cache_resource(show_spinner="Processing PDF...")
 def build_vector_store(_docs):
