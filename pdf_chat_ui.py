@@ -12,6 +12,8 @@ import tempfile
 import os
 
 load_dotenv()
+import os
+os.environ["GROQ_API_KEY"] = st.secrets.get("GROQ_API_KEY", os.getenv("GROQ_API_KEY"))
 
 st.set_page_config(page_title="PDF Chat Agent", page_icon="📄", layout="wide")
 st.title("📄 PDF Chat Agent")
