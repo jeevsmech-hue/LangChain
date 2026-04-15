@@ -62,6 +62,7 @@ with st.sidebar:
     uploaded_file = st.file_uploader("Choose a PDF file", type="pdf")
 
     if uploaded_file:
+    if st.session_state.get("uploaded_filename") != uploaded_file.name:
         with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp:
             tmp.write(uploaded_file.read())
             tmp_path = tmp.name
@@ -69,13 +70,15 @@ with st.sidebar:
         with st.spinner("Indexing PDF..."):
             if "vector_store" in st.session_state:
                 del st.session_state.vector_store
+
             loader = PyPDFLoader(tmp_path)
             docs = loader.load()
             st.session_state.vector_store = build_vector_store(tuple(docs))
             st.session_state.chat_history = []
+            st.session_state.uploaded_filename = uploaded_file.name  # ✅ track filename
+
         os.unlink(tmp_path)
         st.success(f"✅ Indexed {len(docs)} pages")
-
     st.divider()
     if st.button("🗑️ Clear Chat"):
         st.session_state.chat_history = []
