@@ -5,6 +5,9 @@ langchain-text-splitters
 faiss-cpu
 pypdf
 langchain-groq
+langchain-huggingface
+python-dotenv
+sentence-transformers
 annotated-types==0.7.0
 anyio==4.13.0
 certifi==2026.2.25
